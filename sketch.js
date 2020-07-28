@@ -53,7 +53,7 @@ function draw(){
         noStroke();
         textSize(35)
         fill("white")
-        text("Score  " + score, width-300, 50)
+        text("Score:  " + score, width-300, 50)
     
     Engine.update(engine);
     //strokeWeight(4);
@@ -95,6 +95,8 @@ function mouseReleased(){
 function keyPressed(){
     if(keyCode === 32){
        slingshot.attach(bird.body);
+       bird.trajectory = [];
+       Matter.Body.setPosition(bird.body, {x:200, y:50});
     }
 }
 
@@ -103,6 +105,7 @@ async function getBackgroundImg(){
     var responseJSON = await response.json();
 
     var datetime = responseJSON.datetime;
+    console.log(datetime);
     var hour = datetime.slice(11,13);
     
     if(hour>=0600 && hour<=1900){
@@ -113,5 +116,5 @@ async function getBackgroundImg(){
     }
 
     backgroundImg = loadImage(bg);
-    console.log(backgroundImg);
+    //console.log(backgroundImg);
 }
